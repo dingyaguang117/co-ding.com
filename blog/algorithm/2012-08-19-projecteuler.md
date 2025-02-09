@@ -2,6 +2,7 @@
 layout: doc
 title: "ProjectEuler,1-10 题"
 date: 2012-08-19 15:04:02 +0800
+category: "算法&数据结构"
 ---
 
 先介绍一下，ProjectEuler，欧拉工程，是一个国外的练习数论的网站，总共 300 多道题目。

@@ -2,6 +2,7 @@
 layout: doc
 title: "Python 程序的内存泄露排查"
 date: 2016-05-05 15:04:02 +0800
+category: "Python"
 ---
 
 上周被投诉我的 Python 进程占用了太多内存，并且持续增长。本来我不以为然，觉得应该是 Python 自己的 GC 并不是那么及时。然而加上手动的 GC（定时调用 gc.collect() ），并没有什么卵用。

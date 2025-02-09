@@ -2,6 +2,7 @@
 layout: doc
 title: "MindHero 项目总结 -- Chrome 插件开发"
 date: 2019-10-18 15:04:02 +0800
+category: "前端"
 ---
 
 ## Chrome 插件开发介绍

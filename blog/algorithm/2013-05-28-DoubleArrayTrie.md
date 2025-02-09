@@ -2,6 +2,7 @@
 layout: doc
 title: "Double Array Trie - 双数组 Trie 树 （Java 实现）"
 date: 2012-05-28 15:04:02 +0800
+category: "算法&数据结构"
 ---
 
 ## 双数组 Trie 树 介绍

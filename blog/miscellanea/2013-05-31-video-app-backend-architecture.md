@@ -2,6 +2,7 @@
 layout: doc
 title: "视频聚合 APP 的后台架构"
 date: 2013-05-31 15:04:02 +0800
+category: "杂项"
 ---
 
 ![](/blog/assets/img/2013-05-31-video-app-backend-architecture.png)

@@ -2,6 +2,7 @@
 layout: doc
 title: "SVG 不规则圆形动画"
 date: 2019-04-12 15:04:02 +0800
+category: "前端"
 ---
 
 ## 前言：

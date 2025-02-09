@@ -2,6 +2,7 @@
 layout: doc
 title: "SQLAlchemy 使用简略"
 date: 2020-01-27 00:00:00 +0800
+category: "Python"
 ---
 
 ## 一、查询：

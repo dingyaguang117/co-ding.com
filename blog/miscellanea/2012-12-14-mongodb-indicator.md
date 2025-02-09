@@ -2,6 +2,7 @@
 layout: doc
 title: "mongodb 的数组定位器$"
 date: 2012-12-14 15:04:02 +0800
+category: "杂项"
 ---
 
 先看一下下面这个文档:

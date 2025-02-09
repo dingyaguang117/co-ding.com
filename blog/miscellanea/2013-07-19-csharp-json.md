@@ -2,6 +2,7 @@
 layout: doc
 title: "C# 对 JSON 的支持"
 date: 2013-04-11 15:04:02 +0800
+category: "杂项"
 ---
 
 .net 本身对 JSON 的对象映射做的很好，如果 JSON 数据的格式确定，并不太需要第三方库。

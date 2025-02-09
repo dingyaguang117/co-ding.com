@@ -2,6 +2,7 @@
 layout: doc
 title: "Python 实现的 HTTP(s) 代理服务器"
 date: 2014-01-25 15:04:02 +0800
+category: "Python"
 ---
 
 前言:翻墙的工具大家用的最多的就是 GoAgent 和 VPN 了，其中 GoAgent 的原理是在本地搭一个 HTTP(s)代理服务器，浏览器上做好代理配置，然后本地代理再将浏览器的请求转发到墙外的服务器，再由远程服务器请求数据。

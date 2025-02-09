@@ -2,6 +2,7 @@
 layout: doc
 title: "三角形费马点"
 date: 2012-01-27 00:00:00 +0800
+category: "算法&数据结构"
 outline: deep
 ---
 

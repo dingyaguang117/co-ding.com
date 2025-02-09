@@ -3,6 +3,7 @@ layout: doc
 title: Project Euler 201 - 多维背包
 lang: en-US
 date: 2012-03-04 00:00:00 +0800
+category: "算法&数据结构"
 ---
 
 原题：[http://projecteuler.net/problem=201](http://projecteuler.net/problem=201)

@@ -2,7 +2,7 @@
 layout: doc
 title: "使用 line_profiler 进行性能分析优化"
 date: 2020-9-25 15:04:02 +0800
-category: "随手记"
+category: "Python"
 ---
 
 1. 安装 line_profiler：

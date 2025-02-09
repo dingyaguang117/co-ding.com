@@ -2,6 +2,7 @@
 layout: doc
 title: "Python Debug with GDB"
 date: 2019-12-30 15:04:02 +0800
+category: "Python"
 ---
 
 为什么需要使用 GDB 来调试程序？

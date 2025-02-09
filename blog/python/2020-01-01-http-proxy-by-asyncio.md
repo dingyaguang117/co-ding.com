@@ -2,6 +2,7 @@
 layout: doc
 title: "使用 asyncio 100行代码实现https代理"
 date: 2020-01-01 00:00:00 +0800
+category: "Python"
 ---
 
 今天学习了下 asyncio， 准备写段代码练练，想起 6 年前有写过一个多线程版本 HTTPS 代理，于是花了一下午时间使用 asyncio 重写一下。

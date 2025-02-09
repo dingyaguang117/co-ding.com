@@ -2,6 +2,7 @@
 layout: doc
 title: "BloomFilter - 布隆过滤器"
 date: 2012-10-08 15:04:02 +0800
+category: "算法&数据结构"
 ---
 
 ## BloomFilter 介绍与实现

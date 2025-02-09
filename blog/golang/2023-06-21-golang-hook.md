@@ -2,6 +2,7 @@
 layout: doc
 title: "Golang 实现 Hook"
 date: 2023-06-21 00:00:00 +0800
+category: "Golang"
 ---
 
 Hook(钩子) 的一种实现方式是像洋葱一样，一层层的将目标函数包在里面，可以在执行前、执行后分别执行某些操作。形式类似于 Python 中的 [contextmanager](https://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p22_define_context_managers_the_easy_way.html)。
