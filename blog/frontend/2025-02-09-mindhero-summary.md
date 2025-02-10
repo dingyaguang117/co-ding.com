@@ -35,3 +35,5 @@ category: "前端"
 所以虽然很不舍，但是我不得不承认 MindHero 的生命即将随着 Chrome 对 Manifest V2 扩展 的停止支持而到达终点。
 
 ## 存档
+
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113973953366528&bvid=BV12nNUeHE6u&cid=28298576113&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="447px"></iframe>

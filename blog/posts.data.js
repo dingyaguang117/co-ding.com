@@ -15,6 +15,8 @@ export default createContentLoader("blog/*/*.md", {
         return +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date);
       })
       .map((post) => {
+        let date = new Date(post.frontmatter.date).toLocaleDateString();
+        post.frontmatter.date = date;
         return post;
       });
   },
