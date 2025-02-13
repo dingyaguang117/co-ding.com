@@ -7,7 +7,7 @@ category: "Python"
 
 今天学习了下 asyncio， 准备写段代码练练，想起 6 年前有写过一个多线程版本 HTTPS 代理，于是花了一下午时间使用 asyncio 重写一下。
 
-HTTPS 代理，原理这里就不赘述了，可以参考 [Python 实现的 HTTP(s) 代理服务器](/python/2014-01-25-Python-Http-Proxy)
+HTTPS 代理，原理这里就不赘述了，可以参考 [Python 实现的 HTTP(s) 代理服务器](2014-01-25-Python-Http-Proxy)
 
 先简述一下当年的版本的实现逻辑：
 
