@@ -10,7 +10,11 @@
   <Layout>
     <template #doc-before>
       <h1 class="title">{{ page.title }}</h1>
-      <span class="date">{{ page.frontmatter.date }}</span>
+      <br />
+      <span class="description">🏷 {{ page.frontmatter.category }}</span> &nbsp;
+      <span class="description">🕒 {{ new Date(page.frontmatter.date).toLocaleDateString() }}</span>
+      <br />
+      <br />
     </template>
   </Layout>
 </template>

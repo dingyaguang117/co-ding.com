@@ -5,6 +5,8 @@ date: 2023-06-21 00:00:00 +0800
 category: "Golang"
 ---
 
+## Hook?
+
 Hook(钩子) 的一种实现方式是像洋葱一样，一层层的将目标函数包在里面，可以在执行前、执行后分别执行某些操作。形式类似于 Python 中的 [contextmanager](https://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p22_define_context_managers_the_easy_way.html)。
 
 为了实现这种效果，可以利用函数闭包来轻松实现，下面我们就尝试在 Golang 中实现 Hook 功能.
@@ -149,7 +151,7 @@ func TestHookFunc(t *testing.T) {
 ----- after ----
 ```
 
-# 四、使用泛型改造 Hooker
+## 四、使用泛型改造 Hooker
 
 ```go
 package hooker

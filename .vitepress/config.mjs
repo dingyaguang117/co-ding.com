@@ -4,14 +4,13 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Yaguang's Blog",
   description: "Keep Thinking, Keep Coding",
-  lastUpdated: true,
+  lastUpdated: false,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      // { text: "Home", link: "/" },
-      { text: "Blogs", link: "/blog" },
-      // { text: "Projects", link: "/" },
-      // { text: "About", link: "/" },
+      { text: "Blogs", link: "/" },
+      { text: "Projects", link: "/projects" },
+      { text: "About", link: "/abot" },
     ],
     sidebar1: [
       {
