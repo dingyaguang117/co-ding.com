@@ -10,7 +10,7 @@ export default defineConfig({
     nav: [
       { text: "Blogs", link: "/" },
       { text: "Projects", link: "/projects" },
-      { text: "About", link: "/abot" },
+      { text: "About", link: "/about" },
     ],
     sidebar1: [
       {
@@ -89,9 +89,9 @@ export default defineConfig({
         ],
       },
     ],
-    socialLinks: [{ icon: "github", link: "/blog/https://github.com/vuejs/vitepress" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/dingyaguang117" }],
   },
   markdown: {
-    theme: { light: "vitesse-dark", dark: "vitesse-dark" },
+    theme: { light: "dracula", dark: "dracula" },
   },
 });

@@ -39,7 +39,7 @@ import { data as posts } from './blog/posts.data.js'
 
     .description {
       font-size: 13px;
-      color: rgb(118,105,67)
+      color: var(--vp-c-text-2);
     }
   }
 </style>
