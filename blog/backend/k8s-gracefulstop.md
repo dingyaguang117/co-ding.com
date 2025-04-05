@@ -31,11 +31,11 @@ Kubernetes 的优雅停止机制主要依赖于信号处理系统和提前通知
 
 1. **触发终止**：当用户执行 `kubectl delete pod` 或更新 Deployment 触发滚动更新时，优雅停止过程开始。
 
-2. **PreStop 钩子**：如果定义了 PreStop 生命周期钩子，Kubernetes 会在发送 SIGTERM 前执行此钩子。这为应用提供了额外的准备时间，例如，可以通过 HTTP 调用通知应用准备停止。
+2. **服务摘流**：Pod 被标记为 "Terminating" 并从 Service 的 Endpoints 列表中移除。然而，需要注意的是，这个过程并非即时的，存在一定的延迟。
 
-3. **服务摘流**：Pod 被标记为 "Terminating" 并从 Service 的 Endpoints 列表中移除。然而，需要注意的是，这个过程并非即时的，存在一定的延迟。
+3. **PreStop 钩子**：如果定义了 PreStop 生命周期钩子，Kubernetes 会在发送 SIGTERM 前执行此钩子。这为应用提供了额外的准备时间，例如，可以通过 HTTP 调用通知应用准备停止。
 
-4. **SIGTERM 信号处理**：应用接收 SIGTERM 信号后，应开始有序关闭。这包括完成当前请求、关闭监听端口、释放资源等。
+4. **SIGTERM 信号处理**：给 Pod 发送 SIGTERM 信号，应用接收 SIGTERM 信号后，应开始有序关闭。这包括完成当前请求、关闭监听端口、释放资源等。
 
 5. **宽限期倒计时**：Kubernetes 会等待 `terminationGracePeriodSeconds` 指定的时间（默认 30 秒）。
 
@@ -49,7 +49,7 @@ Kubernetes 的优雅停止机制主要依赖于信号处理系统和提前通知
 
 **gRPC 长连接**的情况更为复杂。gRPC 基于 HTTP/2，通常维持长时间的连接，多个请求可能共享同一连接。当服务需要优雅停止时，既要停止接受新连接，也要妥善处理现有连接上的请求，同时通知客户端连接即将关闭。gRPC 提供了专门的机制如 `GracefulStop()` 方法，在停止服务器时会完成所有未完成的 RPC 调用，并拒绝新的调用。
 
-长连接服务的优雅停止通常需要额外的策略，如连接耗尽（drain connections）或主动通知客户端重连到其他实例。这也是为什么 gRPC 服务通常需要更长的优雅停止时间。
+长连接服务的优雅停止通常需要额外的策略，如连接耗尽（drain connections）或主动通知客户端重连到其他实例（通过发送 GoAway 帧）。这也是为什么 gRPC 服务通常需要更长的优雅停止时间。
 
 ## NodePort 与 Ingress 在流量管理中的角色
 
@@ -65,11 +65,11 @@ Kubernetes 的优雅停止机制主要依赖于信号处理系统和提前通知
 
 尽管 Kubernetes 提供了优雅停止的框架，实际应用中仍存在一些常见问题：
 
-**问题一：摘流延迟**
+### 1. 摘流延迟
 
 服务从 Endpoints 列表移除到实际不再接收流量之间存在延迟，导致 Pod 在开始停止过程后仍可能收到新请求。
 
-**解决方案**：实现 PreStop 钩子，添加额外的等待时间（通常为 5-10 秒），给 Kubernetes 和负载均衡器足够时间更新配置。例如：
+**解决方案**：实现 PreStop 钩子，添加额外的等待时间，给 Kubernetes 和负载均衡器足够时间更新配置。例如：
 
 ```yaml
 lifecycle:
@@ -78,35 +78,18 @@ lifecycle:
       command: ["sh", "-c", "sleep 10"]
 ```
 
-**问题二：长连接处理不当**
+### 2. 应用未正确处理 SIGTERM
 
-对于 gRPC 或 WebSocket 等长连接服务，如果没有妥善处理连接关闭，可能导致客户端错误或超时。
+许多应用未正确实现 SIGTERM 信号处理，导致无法优雅停止。一般的 Server 框架都会提供诸如 GracefulStop 的方法来处理当前未完成的请求，然后再关闭程序。如果直接关闭可能导致请求无法响应（比如常见的 HTTP 的 499 状态）。
 
-**解决方案**：在应用层实现优雅关闭逻辑，收到 SIGTERM 后主动通知客户端连接即将关闭，并给予客户端重连的机会。许多框架提供了专门的 API 来处理这种场景。
+### 3. 长连接处理不当
 
-**问题三：宽限期设置不合理**
+对于长连接服务，除了 EndPoints 摘流，已经建立的链接也应该主动通知客户端连接即将关闭。比如 gRPC 的 GracefulStop 会给客户端发送 GoAway 帧通知，客户端在收到 GoAway 时停止继续往当前连接发送新情求，并及时建立新连接。
 
-默认的 30 秒宽限期对某些应用可能太短，导致请求被强制中断。
+因此长连接的优雅停止一般需要 Server 和 Client 互相配合实现。
 
-**解决方案**：根据应用特性合理设置 `terminationGracePeriodSeconds`，为长时间运行的任务留出足够余量。对于数据处理或批处理任务，可能需要设置更长时间。
+> Nginx 在 1.21.1 之前有 Bug 无法正确处理 gRPC GoAway，会导致一直给即将停止的连接发送新消息，导致后端关闭时 499/502.
 
-```yaml
-spec:
-  terminationGracePeriodSeconds: 60
-```
+## 参考文档
 
-**问题四：应用未正确处理信号**
-
-许多应用未正确实现 SIGTERM 信号处理，导致无法优雅停止。
-
-**解决方案**：确保应用代码中包含信号处理逻辑。不同语言有不同的实现方式，例如在 Node.js 中：
-
-```javascript
-process.on("SIGTERM", () => {
-  console.log("Received SIGTERM, shutting down gracefully");
-  server.close(() => {
-    console.log("Server closed");
-    process.exit(0);
-  });
-});
-```
+- [Pod 的生命周期](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination)

@@ -139,3 +139,10 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+
+
+.vp-doc [class*=language-]>button.copy {
+  display: none;
+  width: 30px;
+  height: 30px;
+}
