@@ -2,6 +2,8 @@
   import DefaultTheme from "vitepress/theme";
   import { useData } from "vitepress";
 
+  import GiscusComment from "./components/GiscusComment.vue";
+
   const { Layout } = DefaultTheme;
   const { page } = useData();
 </script>
@@ -18,6 +20,11 @@
         <br />
         <br />
       </div>
+    </template>
+
+    <!-- doc 底部 -->
+    <template #doc-after>
+      <GiscusComment />
     </template>
 
     <!-- 所有页面底部 -->
