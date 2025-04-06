@@ -23,8 +23,9 @@ import { data as posts } from './blog/posts.data.js'
 
 <style>
   .main {
-    width: 680px;
+    max-width: 680px;
     margin: 0 auto;
+    padding: 0 30px;
   }
 
   .blog {
