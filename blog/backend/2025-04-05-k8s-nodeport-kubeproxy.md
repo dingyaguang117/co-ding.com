@@ -3,6 +3,7 @@ layout: doc
 title: "NodePort 服务下的流量摘除：kube-proxy 的工作机制"
 date: 2025-04-05 16:14:02 +0800
 category: 后端
+hidden: true
 ---
 
 在 Kubernetes 集群中，当我们谈论优雅停止的过程时，服务流量的摘除是关键环节。特别是对于使用 NodePort 类型的服务，理解 kube-proxy 如何处理流量摘除对于排查问题和优化配置至关重要。本文将深入探讨在 NodePort 服务模式下，kube-proxy 是如何实现对终止中 Pod 的流量摘除的。

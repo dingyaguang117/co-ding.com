@@ -3,6 +3,7 @@ layout: doc
 title: "深入理解 Kubernetes 优雅停止机制"
 date: 2025-04-04 10:14:02 +0800
 category: 后端
+hidden: true
 ---
 
 在现代云原生应用部署中，Kubernetes（K8S）已成为容器编排的事实标准。随着微服务架构的广泛采用，如何保证服务平滑更新、无损下线变得尤为重要。本文将详细探讨 K8S 中的优雅停止（Graceful Shutdown）机制，这是确保应用可靠性和用户体验的关键环节。
