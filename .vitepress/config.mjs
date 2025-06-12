@@ -9,8 +9,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Blogs", link: "/" },
-      { text: "Projects", link: "/projects" },
-      { text: "About", link: "/about" },
+      // { text: "Projects", link: "/projects" },
+      // { text: "About", link: "/about" },
     ],
     sidebar1: [
       {
